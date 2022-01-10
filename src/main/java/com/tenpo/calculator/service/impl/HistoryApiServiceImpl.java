@@ -9,9 +9,12 @@ import com.tenpo.calculator.dto.HistoryResponse;
 import com.tenpo.calculator.entities.HistoryApi;
 import com.tenpo.calculator.exception.ResourceNotFoundException;
 import com.tenpo.calculator.repository.HistoryApiRepository;
+import com.tenpo.calculator.service.HistoryApiMapper;
 import com.tenpo.calculator.service.HistoryApiService;
+import com.tenpo.calculator.service.HistoryDtoMapper;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +28,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class HistoryApiServiceImpl implements HistoryApiService{
     
+    @Autowired
+    HistoryApiMapper historyApiMapper;
+    
+    @Autowired
+    HistoryDtoMapper historyDtoMapper;
+    
     private HistoryApiRepository historyApiRepository;
 
     public HistoryApiServiceImpl(HistoryApiRepository historyApiRepository) {
@@ -34,11 +43,11 @@ public class HistoryApiServiceImpl implements HistoryApiService{
     @Override
     public HistoryDto createHistory(HistoryDto historyDto) {
         // convert DTO to entity
-        HistoryApi historyApi = mapToEntity(historyDto);
+        HistoryApi historyApi = historyDtoMapper.historyDtoToHistoryApi(historyDto);
         HistoryApi newHistoryApi = historyApiRepository.save(historyApi);
 
         // convert entity to DTO
-        HistoryDto historyResponse = mapToDTO(newHistoryApi);
+        HistoryDto historyResponse = historyApiMapper.historyApiToHistoryDto(newHistoryApi);
         return historyResponse;
     }
 
@@ -55,7 +64,7 @@ public class HistoryApiServiceImpl implements HistoryApiService{
        // get content for page object
        List<HistoryApi> listOfHistory = posts.getContent();
 
-       List<HistoryDto> content= listOfHistory.stream().map(history -> mapToDTO(history)).collect(Collectors.toList());
+       List<HistoryDto> content= listOfHistory.stream().map(history -> historyApiMapper.historyApiToHistoryDto(history)).collect(Collectors.toList());
 
        HistoryResponse historyResponse = new HistoryResponse();
        historyResponse.setContent(content);
@@ -69,22 +78,22 @@ public class HistoryApiServiceImpl implements HistoryApiService{
     }
     
         // convert Entity into DTO
-    private HistoryDto mapToDTO(HistoryApi historyApi){
+/*    private HistoryDto mapToDTO(HistoryApi historyApi){
 //        HistoryDto historyDto = mapper.map(historyApi, HistoryDto.class);
         HistoryDto historyDto = new HistoryDto();
         historyDto.setApi(historyApi.getApi());
         historyDto.setInput(historyApi.getInput());
         historyDto.setCreated(historyApi.getCreated());        
         return historyDto;
-    }
+    }*/
 
     // convert DTO to entity
-    private HistoryApi mapToEntity(HistoryDto historyDto){
+ /*   private HistoryApi mapToEntity(HistoryDto historyDto){
 //        HistoryApi post = mapper.map(historyDto, HistoryApi.class);
         HistoryApi historyApi = new HistoryApi();
         historyApi.setApi(historyDto.getApi());
         historyApi.setInput(historyDto.getInput());
         historyApi.setCreated(historyDto.getCreated());
         return historyApi;
-    }
+    }*/
 }

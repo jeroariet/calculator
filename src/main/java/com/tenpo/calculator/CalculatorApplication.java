@@ -20,6 +20,10 @@ public class CalculatorApplication implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
 
+     Role fullRole = new Role();
+     fullRole.setName("ROLE_FULL");
+     roleRepository.save(fullRole);        
+        
      Role adminRole = new Role();
      adminRole.setName("ROLE_ADMIN");
      roleRepository.save(adminRole);

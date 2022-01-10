@@ -14,12 +14,7 @@ services:
       - JAVA_OPTS=
          -Xms256M 
          -Xmx256M
-      - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-      - spring.jpa.hibernate.ddl-auto=create-drop
-      - spring.jpa.show-sql=true
-      - spring.datasource.url=jdbc:postgresql://postgres_db:5432/springboot
-      - spring.datasource.username=springboot
-      - spring.datasource.password=qwerty
+         -Dspring.profiles.active=prod
     ports:
       - 8083:8083
     depends_on:

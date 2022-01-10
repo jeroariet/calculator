@@ -34,14 +34,6 @@ public HistoryApiRestController(HistoryApiService historyApiService) {
     this.historyApiService = historyApiService;
 }
 
-@ApiOperation(value = "Create history REST API")
-@PreAuthorize("hasRole('ADMIN')")
-// create blog post rest api
-@PostMapping("/create")
-public ResponseEntity<HistoryDto> createPost(@Valid @RequestBody HistoryDto historyDto){
-    return new ResponseEntity<>(historyApiService.createHistory(historyDto), HttpStatus.CREATED);
-}
-
 @ApiOperation(value = "Get All history REST API")
 @PreAuthorize("hasRole('ADMIN')")
 // get all posts rest api
