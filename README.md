@@ -10,7 +10,7 @@ Aplicación encargada de realizar operación suma de 2 numeros solo para usuario
 
 - Ingresar a la url http://localhost:8083/swagger-ui/index.html
 
-###Registrar registrar usuarios mediante api
+### Registrar registrar usuarios mediante api
 [/api/auth/signup](http://localhost:8083/swagger-ui/index.html#/user-rest-controller/registerUserUsingPOST)
 Ingresando en el body
 ~~~~
@@ -22,7 +22,7 @@ Ingresando en el body
 }
 ~~~~
 
-###Iniciar sesion del usuario registrado con la api
+### Iniciar sesion del usuario registrado con la api
 [/api/auth/signin](http://localhost:8083/swagger-ui/index.html#/user-rest-controller/authenticateUserUsingPOST)
 
 Pasando usuario y contraseña con la que se registro el usuario
@@ -34,7 +34,7 @@ Pasando usuario y contraseña con la que se registro el usuario
 ~~~~
 Con el usuario logueado debe pasar el token a la api de calculo de suma.
 
-###Api para realizar calculos
+### Api para realizar calculos
 [/operation/sum](http://localhost:8083/swagger-ui/index.html#/operation-rest-controller/sumUsingGET)
 
 Pasando los 2 valores a realizar la operación
@@ -43,9 +43,9 @@ En donde debe completarse el token con los siguiente valores
 ~~~~
 "Bearer (token devuelto por signin)"
 ~~~~
-###[Para consultar el historial de las operaciones realizada]()
+### [Para consultar el historial de las operaciones realizada]()
 
-###Api historico operaciones
+### Api historico operaciones
 [/api/history](http://localhost:8083/swagger-ui/index.html#/history-api-rest-controller/getAllPostsUsingGET)
 
 Esta api cuenta con 4 parametro los cuales le permite paginar el resultado y realizar un ordenamiento
